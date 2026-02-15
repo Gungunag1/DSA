@@ -1,0 +1,19 @@
+
+ // using brute force approach we get TLE but using two pointer approach we get  answer
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int st=0;
+        int maxW=0;
+        int pt= height.size()-1;
+        while(st<pt){
+            int width=pt-st;
+            int h=min(height[pt],height[st]);
+             int vol=width*h;
+              maxW=max(vol,maxW);
+            height[st]<height[pt]?st++:pt--;
+        }
+         return maxW;
+    }
+};
