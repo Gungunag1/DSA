@@ -1,5 +1,5 @@
 
-// brute force approach
+// brute force approach---O(n^2)
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -20,7 +20,7 @@ arr.push_back(j);
 };
 
 
-//better approach
+//better approach---> O(nlogn)
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
