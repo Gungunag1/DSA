@@ -1,0 +1,19 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include<vector>
+using namespace std;
+bool checkifarraysorted(vector<int>arr,int n){
+    if(n==0 ||n==1){
+        return true;
+    }
+    return arr[n-1]>=arr[n-2] &&  checkifarraysorted(arr,n-1);
+}
+int main() {
+    vector<int >arr={1,2,4,7};
+    // int n= arr.size();
+    // for(int i=0;i<n;i++){
+    //     cin>>arr[i];
+    // }
+   cout<<"array is sorted"<<checkifarraysorted(arr,arr.size())<<endl;
+   return 0;
+}
