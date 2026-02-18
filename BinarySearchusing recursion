@@ -1,0 +1,22 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include<vector>
+using namespace std;
+bool sorted(vector<int>arr,int target,int s,int e){
+  if(s<=e){
+     int  mid=s+e-s/2;
+      if(arr[mid]==target) return true;
+      else if (arr[mid]>target){
+      return sorted(arr,target,s,mid-1);
+      }
+      else return sorted(arr,target,mid+1,e);
+  }
+  return false;
+}
+int main() {
+    vector<int >arr={1};
+int target=1;
+  
+   cout<<"element found or not"<<sorted(arr,target,0,arr.size()-1)<<endl;
+   return 0;
+}
