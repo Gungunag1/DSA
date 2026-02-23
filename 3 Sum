@@ -24,3 +24,30 @@ set<vector<int>>s;
 
     }
 };
+
+
+
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n = nums.size();
+        set<vector<int>> ans;
+        for (int i = 0; i < n; i++) {
+            int target = -nums[i];
+            set<int> s;
+            for (int j = i + 1; j < n; j++) {
+                int c = target - nums[j];
+                if (s.find(c) != s.end()) {
+                  vector<int>temp=  {nums[i], nums[j], c};
+                  sort(temp.begin(),temp.end());
+                  ans.insert(temp);
+                }
+                  s.insert(nums[j]); 
+            }
+           
+        }
+
+        return vector<vector<int>>(ans.begin(), ans.end());
+    }
+};
