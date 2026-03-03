@@ -1,0 +1,28 @@
+Time complexity--O(N)
+
+
+class Solution {
+public:
+    char findKthBit(int n, int k) {  // n=4,k=11
+          // Base case
+        if (n == 1) 
+            return '0';
+
+        int mid = 1 << (n - 1);   // 2^(n-1)  // 8
+
+        // If k is the middle position
+        if (k == mid)
+            return '1';
+
+        // If k is in the left half
+        if (k < mid)
+            return findKthBit(n - 1, k);
+
+        // If k is in the right half
+        int mirror = (1 << n) - k;   // 2^n - k  //2^4-11=5
+        char bit = findKthBit(n - 1, mirror);  //   findkthBit(3,5)
+
+        // Invert the bit
+        return (bit == '0') ? '1' : '0';
+    }
+};
