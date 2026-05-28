@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int numberOfSpecialChars(string word) {
+        unordered_map<char, int> lower;
+        unordered_map<char, int> upper;
+        int n = word.size();
+        for (int i = 0; i < n; i++) {
+            if (islower(word[i])) {
+                lower[word[i]] = i; // last
+            } else {
+                if (upper.find(word[i]) == upper.end()) { // first aaAaaA
+                    upper[word[i]] = i;
+                }
+            }
+        }
+        int cnt = 0;
+        for (auto i : lower) {
+            char lowerchar = i.first;
+            int loweridx = i.second;
+            char upperchar = toupper(lowerchar);
+            if (upper.find(upperchar) != upper.end()) {
+                if (loweridx < upper[upperchar]) {
+                    cnt += 1;
+                }
+            }
+        }
+        return cnt;
+    }
+};
