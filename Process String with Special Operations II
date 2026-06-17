@@ -1,27 +1,61 @@
 class Solution {
 public:
-    char processStr(string s, long long k) {
-        string ans = "";
+    const long long LIM = 1e15;
 
-        for (char ch : s) {
-            if (ch >= 'a' && ch <= 'z') {
-                ans.push_back(ch);
+    char solve(string &s, vector<long long> &len, int idx, long long k) {
+        if (idx < 0)
+            return '.';
+
+        char ch = s[idx];
+
+        if (ch >= 'a' && ch <= 'z') {
+            if (k == len[idx])
+                return ch;
+            return solve(s, len, idx - 1, k);
+        }
+
+        if (ch == '*') {
+            return solve(s, len, idx - 1, k);
+        }
+
+        if (ch == '#') {
+            long long half = len[idx];
+            if (k >= half)
+                k -= half;
+            return solve(s, len, idx - 1, k);
+        }
+
+        // ch == '%'
+        if (len[idx] > 0)
+            k = len[idx] - 1 - k;
+
+        return solve(s, len, idx - 1, k);
+    }
+
+    char processStr(string s, long long k) {
+
+        int n = s.size();
+        vector<long long> len(n + 1, 0);
+
+        for (int i = 0; i < n; i++) {
+
+            if (s[i] >= 'a' && s[i] <= 'z') {
+                len[i + 1] = min(LIM, len[i] + 1);
             }
-            else if (ch == '*') {
-                if (!ans.empty())
-                    ans.pop_back();
+            else if (s[i] == '*') {
+                len[i + 1] = (len[i] > 0 ? len[i] - 1 : 0);
             }
-            else if (ch == '#') {
-                ans += ans;
+            else if (s[i] == '#') {
+                len[i + 1] = min(LIM, len[i] * 2);
             }
-            else if (ch == '%') {
-                reverse(ans.begin(), ans.end());
+            else { // %
+                len[i + 1] = len[i];
             }
         }
 
-        if (k >= ans.size())
+        if (k >= len[n])
             return '.';
 
-        return ans[k];
+        return solve(s, len, n - 1, k);
     }
 };
