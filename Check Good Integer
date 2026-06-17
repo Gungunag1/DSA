@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool checkGoodInteger(int n) {
+        string s = to_string(n);
+        int sum = 0, squareSum = 0;
+        for (char c : s) {
+             int ch = c - '0';
+            sum += ch;
+            squareSum += ch * ch;
+            int diff = squareSum - sum;
+            if (diff >= 50) {
+                return true;
+            }
+        }
+         return false;
+    }
+   
+};
