@@ -1,0 +1,22 @@
+class Solution {
+public:
+    long long sumAndMultiply(int n) {
+        long long ans = 0;
+        int sum = 0;
+        string a = "";
+        string s = to_string(n);
+        for (char ch : s) {
+            if (ch != '0')
+                a += ch;
+            int num = ch - '0';
+            sum += num;
+        }
+        if (a.empty())
+            return 0;
+
+        long long str = stoll(a);
+
+        ans = str * sum;
+        return ans;
+    }
+};
