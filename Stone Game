@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool stoneGame(vector<int>& a) {
+        int alice = 0, bob = 0;
+        bool turn = true; // true = Alice // false=Bob
+
+        while (!a.empty()) {
+            int x = a.back();
+            a.pop_back();
+
+            if (turn)
+                alice += x;
+            else
+                bob += x;
+
+            turn = !turn;
+        }
+        return turn;
+    }
+};
